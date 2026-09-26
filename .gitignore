@@ -44,6 +44,10 @@ target_wrapper.*
 
 # QtCtreator CMake
 CMakeLists.txt.user*
+CMakeCache.
+cmake_install.cmake
+Makefile
+__cmake_systeminformation
 
 *.pyc
 
@@ -59,3 +63,11 @@ CMakeLists.txt.user*
 .DS_Store
 *DS_Store
 ._*
+
+.cpm-cache/
+
+# ninja
+.ninja_deps
+.ninja_lock
+.ninja_log
+build.ninja

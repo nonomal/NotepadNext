@@ -243,7 +243,10 @@ ${MementoSection} "Auto Updater" SEC_AUTO_UPDATER
 	SetRegView 64
 	SetOutPath $INSTDIR
 
-	File ..\build\package\libcrypto-1_1-x64.dll ..\build\package\libssl-1_1-x64.dll
+	# The OpenSSL DLLs are only shipped with x64 builds; ARM64 builds use Qt's Schannel TLS backend
+	!if /FILEEXISTS "..\build\package\libcrypto-1_1-x64.dll"
+		File ..\build\package\libcrypto-1_1-x64.dll ..\build\package\libssl-1_1-x64.dll
+	!endif
 
 	WriteRegDWORD SHCTX "Software\NotepadNext\NotepadNext\" "AutoUpdate" 1
 ${MementoSectionEnd}
@@ -303,7 +306,7 @@ Section "Uninstall"
 	DeleteRegKey SHCTX "Software\Classes\*\shell\NotepadNext"
 
 	# Remove application registration
-	DeleteRegKey SHCTX "Software\Microsoft\Windows\CurrentVersion\App Paths\NotepadNext.exe" "" "$INSTDIR\NotepadNext.exe"
+	DeleteRegKey SHCTX "Software\Microsoft\Windows\CurrentVersion\App Paths\NotepadNext.exe"
 
 	# Remove registered verbs
 	DeleteRegKey SHCTX "Software\Classes\Applications\NotepadNext.exe"

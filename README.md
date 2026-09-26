@@ -30,13 +30,28 @@ Linux packages can be obtained by downloading the stand-alone AppImage on the [r
 flatpak install flathub com.github.dail8859.NotepadNext
 ```
 
+If you are using Ubuntu and prefer an up-to-date deb version, you can use the [PPA supporting Ubuntu 22.04 and newer](https://launchpad.net/~quentiumyt/+archive/ubuntu/notepadnext) provided by
+[Quentin Lienhardt](https://github.com/QuentiumYT). You can add it by executing:
+
+```bash
+sudo add-apt-repository ppa:quentiumyt/notepadnext
+sudo apt update
+sudo apt install notepadnext
+```
+
 ## MacOS
 MacOS disk images can be downloaded from the [release](https://github.com/dail8859/NotepadNext/releases) page.
 
 It can also be installed using brew:
 ```bash
 brew tap dail8859/notepadnext
-brew install --no-quarantine notepadnext
+brew install notepadnext
+```
+
+If you receive warnings that Notepad Next is "damaged", this is an Apple complaining that I have not paid them money to "trust" me. You can bypass this by running:
+
+```bash
+xattr -d com.apple.quarantine /Applications/NotepadNext.app
 ```
 
 #### MacOS Tweaks
@@ -49,10 +64,13 @@ defaults -currentHost write -g AppleFontSmoothing -int 0
 
 A restart is required for this to take effect.
 
+# Translations
+Translations are contributed by the community. All translations are managed using Crowdin at `https://crowdin.com/project/notepadnext`. If there is a language missing you would like to contribute, feel free to start a discussion on Crowdin.
+
 # Development
 Current development is done using QtCreator with the Microsoft Visual C++ (msvc) compiler. Qt 6.5 is the currently supported Qt version. Older versions of Qt are likely to work but are not tested. Any fixes for older versions will be accepted as long as they do not introduce complex fixes. This application is also known to build successfully on various Linux distributions and macOS. Other platforms/compilers should be usable with minor modifications.
 
-If you are familiar with building C++ Qt desktop applications with Qt Creator, then this should be as simple as opening `src/NotepadNext.pro` and build/run the project.
+If you are familiar with building C++ Qt desktop applications with Qt Creator, then this should be as simple as opening `CMakeLists` and build/run the project.
 
 If you are new to building C++ Qt desktop applications, there is a more detailed guide [here](/doc/Building.md).
 
